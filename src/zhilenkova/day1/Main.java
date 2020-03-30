@@ -1,4 +1,4 @@
-package by.it.zhilenkova.Day1;
+package zhilenkova.day1;
 
 public class Main {
 
