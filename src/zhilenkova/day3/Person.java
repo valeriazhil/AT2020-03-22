@@ -13,7 +13,6 @@ public class Person extends Human {
         return lastName;
     }
 
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
