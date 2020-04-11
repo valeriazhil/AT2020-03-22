@@ -10,12 +10,12 @@ public class JustDoIt {
     public static void main(String[] args) {
 
         TestEngineer testEngineer = new TestEngineer();
-        AutomatedTest automatedTest = new AutomatedTest(TestLevel.GUI,1);
+        AutomatedTest automatedTest = new AutomatedTest(TestLevel.GUI,5);
         AutomationEngineer automationEngineer = new AutomationEngineer();
         ManualTest manualTest = new ManualTest(TestLevel.API, 5);
-        System.out.println(automatedTest.apply(testEngineer) +
-                " | " + manualTest.apply(automationEngineer) +
-                " | " + manualTest.apply(testEngineer));
-
+        System.out.println( " Test 1 " + manualTest.apply(automationEngineer) +
+                "\n Test 2 " + automatedTest.apply(testEngineer) +
+                "\n Test 3 "+ manualTest.apply(testEngineer) +
+                "\n Test 4 " + automatedTest.apply(automationEngineer));
     }
 }
