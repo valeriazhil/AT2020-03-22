@@ -34,7 +34,7 @@ public class UnitTests {
 
     //для мануальщика
 
-     @Test
+    @Test
     public void manualTestPassed() {
         ManualTest manualTest = new ManualTest(TestLevel.UNIT, 2);
         AutomationEngineer automationEngineer = new AutomationEngineer();
@@ -43,9 +43,9 @@ public class UnitTests {
 
     @Test
     public void manualTestFailed() {
-        ManualTest manualTest = new ManualTest(TestLevel.GUI, 4);
+        ManualTest manualTest = new ManualTest(TestLevel.GUI, 5);
         TestEngineer testEngineer = new TestEngineer();
-        Assert.assertEquals("Test 4. MT by manual engineer (test data:  GUI(9), instability 4, anxiety 1:)", Result.FAILED, manualTest.apply(testEngineer));
+        Assert.assertEquals("Test 4. MT by manual engineer (test data:  GUI(9), instability 5, anxiety 1:)", Result.FAILED, manualTest.apply(testEngineer));
     }
 
 
