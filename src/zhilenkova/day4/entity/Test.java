@@ -26,11 +26,18 @@ public abstract class Test implements Function<Engineer, Result> {
 
 
     public void setInstability(int instability) {
-        this.instability = instability;
+        if (instability <= 0)
+            this.instability = 1;
+        else if (instability > 10)
+            this.instability = 10;
+        else
+            this.instability = instability;
     }
 
-    public Test(TestLevel testLevel) {
+     //класс Test должен иметь поля int complexity и int instability, которые инициализируется в конструкторе класса,
+    public Test(TestLevel testLevel, int instability) {
         this.complexity = testLevel.COMPLEXITY;
+        this.setInstability(instability);
     }
 
     @Override
@@ -41,7 +48,7 @@ public abstract class Test implements Function<Engineer, Result> {
             anxiety = engineer.getAnxiety();
         else
             anxiety = 1;
-        if (complexity * instability * anxiety > 30)
+        if ((complexity * instability * anxiety) / engineer.getSkill ()> 30)
             return Result.FAILED;
         else
             return Result.PASSED;
