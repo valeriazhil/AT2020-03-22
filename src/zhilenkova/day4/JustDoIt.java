@@ -9,7 +9,7 @@ import zhilenkova.day4.worker.TestEngineer;
 public class JustDoIt {
     public static void main(String[] args) {
         TestEngineer testEngineer = new TestEngineer();
-        AutomatedTest automatedTest = new AutomatedTest(TestLevel.GUI,12);
+        AutomatedTest automatedTest = new AutomatedTest(TestLevel.GUI,15);
         AutomationEngineer automationEngineer = new AutomationEngineer();
         ManualTest manualTest = new ManualTest(TestLevel.API, 3);
 
