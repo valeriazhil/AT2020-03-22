@@ -3,6 +3,8 @@ package zhilenkova.day4.worker;
 import zhilenkova.day4.entity.Result;
 import zhilenkova.day4.entity.Test;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public abstract class Engineer {
     int anxiety = 3;
     int skill;
@@ -11,17 +13,23 @@ public abstract class Engineer {
         return anxiety;
     }
 
+    public void setAnxiety(int anxiety) {
+        this.anxiety = anxiety;
+    }
+
     public int getSkill() {
         return skill;
     }
 
-    public void setSkill() {
-        this.skill = (int) (1 + Math.random() * 10);
+    public void setSkill(int skill) {
+        this.skill = skill;
+    }
+
+    public void setRandomSkill() {
+        this.skill = ThreadLocalRandom.current().nextInt(1, 11);
     }
 
     public Result executeTest(Test test) {
         return null;
     }
-
-
 }

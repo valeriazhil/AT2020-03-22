@@ -54,3 +54,14 @@ public abstract class Test implements Function<Engineer, Result> {
             return Result.PASSED;
     }
 }
+
+// Tests for apply method
+// Case one if ( true || false) -> true;  if: true
+// Case two if ( true || false) -> true;  if: false
+
+// Case three if ( false || true) -> true;  if: true
+// Case four if ( false || true) -> true;  if: false
+
+// Case five if ( false || false) -> true;  if: true
+// Case six if ( false || false) -> true;  if: false
+
