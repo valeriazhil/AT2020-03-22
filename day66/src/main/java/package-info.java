@@ -1,5 +1,3 @@
-package day6mav;
-
 /*
 Дописать/изменить структуру кода (task http://jira.it-academy.by:8080/browse/ATYG-1):
 

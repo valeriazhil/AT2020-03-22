@@ -1,4 +1,4 @@
-package day6mav.entity;
+package entity;
 
 public enum Result {
     PASSED,

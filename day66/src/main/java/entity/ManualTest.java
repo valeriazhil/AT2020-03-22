@@ -1,4 +1,4 @@
-package day6mav.entity;
+package entity;
 
 public class ManualTest extends TestE {
     public ManualTest(TestLevel testLevel, int instability) {

@@ -1,10 +1,8 @@
-package day6mav;
-
-import zhilenkova.day4.entity.AutomatedTest;
-import zhilenkova.day4.entity.ManualTest;
-import zhilenkova.day4.entity.TestLevel;
-import zhilenkova.day4.worker.AutomationEngineer;
-import zhilenkova.day4.worker.TestEngineer;
+import entity.AutomatedTest;
+import entity.ManualTest;
+import entity.TestLevel;
+import worker.AutomationEngineer;
+import worker.TestEngineer;
 
 public class JustDoIt {
     public static void main(String[] args) {

@@ -1,7 +1,7 @@
-package day6mav.worker;
+package worker;
 
-import day6mav.entity.Result;
-import day6mav.entity.TestE;
+import entity.Result;
+import entity.TestE;
 
 import java.util.concurrent.ThreadLocalRandom;
 

@@ -1,10 +1,10 @@
-package day6mav.entity;
+package entity;
 
-import day6mav.worker.AutomationEngineer;
-import day6mav.worker.Engineer;
-import day6mav.worker.TestEngineer;
+import worker.AutomationEngineer;
+import worker.Engineer;
+import worker.TestEngineer;
 
-import java.util.function.*;
+import java.util.function.Function;
 
 //Т.к. в задаче не указано, что Function<Engineer, Result> нужно написать самим, то использую функциональный интерфейс Function<T,R>
 

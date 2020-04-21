@@ -1,4 +1,4 @@
-package day6mav.worker;
+package worker;
 
     public class AutomationEngineer extends Engineer {
         public AutomationEngineer() {

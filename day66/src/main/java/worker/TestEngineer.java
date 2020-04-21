@@ -1,4 +1,4 @@
-package day6mav.worker;
+package worker;
 
     public class TestEngineer extends Engineer {
        public TestEngineer() {
