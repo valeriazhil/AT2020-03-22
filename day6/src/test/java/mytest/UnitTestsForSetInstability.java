@@ -1,9 +1,7 @@
-package zhilenkova.day4.test;
+package mytest;
 
-import zhilenkova.day4.entity.*;
 import org.junit.Assert;
 import org.junit.Test;
-
 
 
 public class UnitTestsForSetInstability {

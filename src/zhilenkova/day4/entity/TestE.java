@@ -6,7 +6,7 @@ import zhilenkova.day4.worker.TestEngineer;
 //Т.к. в задаче не указано, что Function<Engineer, Result> нужно написать самим, то использую функциональный интерфейс Function<T,R>
 import java.util.function.Function;
 
-public abstract class Test implements Function<Engineer, Result> {
+public abstract class TestE implements Function<Engineer, Result> {
     private int complexity;
     private int instability;
 
@@ -35,7 +35,7 @@ public abstract class Test implements Function<Engineer, Result> {
     }
 
      //класс Test должен иметь поля int complexity и int instability, которые инициализируется в конструкторе класса,
-    public Test(TestLevel testLevel, int instability) {
+    public TestE(TestLevel testLevel, int instability) {
         this.complexity = testLevel.COMPLEXITY;
         this.setInstability(instability);
     }

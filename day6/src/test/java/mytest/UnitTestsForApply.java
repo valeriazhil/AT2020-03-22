@@ -1,7 +1,5 @@
-package zhilenkova.day4.test;
+package mytest;
 
-import zhilenkova.day4.entity.*;
-import zhilenkova.day4.worker.*;
 /*
 import zhilenkova.day4.entity.AutomatedTest;
 import zhilenkova.day4.entity.ManualTest;
@@ -12,7 +10,6 @@ import zhilenkova.day4.worker.AutomationEngineer;
 */
 import org.junit.Assert;
 import org.junit.Test;
-
 
 
 public class UnitTestsForApply {

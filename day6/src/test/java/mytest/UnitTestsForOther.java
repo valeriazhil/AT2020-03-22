@@ -1,9 +1,8 @@
-package zhilenkova.day4.test;
+package mytest;
 
-import zhilenkova.day4.entity.TestE;
-import zhilenkova.day4.worker.*;
 import org.junit.Assert;
 import org.junit.Test;
+import zhilenkova.day4.entity.TestE;
 
 public class UnitTestsForOther {
 
