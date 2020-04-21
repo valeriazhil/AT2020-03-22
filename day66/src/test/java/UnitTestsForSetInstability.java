@@ -1,9 +1,8 @@
-package zhilenkova.day4.test;
-
-import zhilenkova.day4.entity.*;
+import entity.ManualTest;
+import entity.TestE;
+import entity.TestLevel;
 import org.junit.Assert;
 import org.junit.Test;
-
 
 
 public class UnitTestsForSetInstability {
@@ -14,7 +13,7 @@ public class UnitTestsForSetInstability {
     //Case one if(true)-> instability=1
     @Test
     public void instabilityOne() {
-        test = new ManualTest(TestLevel.GUI, 0);
+        test = new ManualTest (TestLevel.GUI, 0);
         Assert.assertEquals( MSG, 1, test.getInstability () );
     }
 

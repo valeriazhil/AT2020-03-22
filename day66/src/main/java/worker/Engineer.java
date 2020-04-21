@@ -1,7 +1,7 @@
-package zhilenkova.day4.worker;
+package worker;
 
-import zhilenkova.day4.entity.Result;
-import zhilenkova.day4.entity.TestE;
+import entity.Result;
+import entity.TestE;
 
 import java.util.concurrent.ThreadLocalRandom;
 

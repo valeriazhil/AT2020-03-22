@@ -1,7 +1,3 @@
-package zhilenkova.day4.test;
-
-import zhilenkova.day4.entity.*;
-import zhilenkova.day4.worker.*;
 /*
 import zhilenkova.day4.entity.AutomatedTest;
 import zhilenkova.day4.entity.ManualTest;
@@ -10,9 +6,12 @@ import zhilenkova.day4.entity.TestLevel;
 import zhilenkova.day4.worker.TestEngineer;
 import zhilenkova.day4.worker.AutomationEngineer;
 */
+import entity.*;
 import org.junit.Assert;
 import org.junit.Test;
-
+import worker.AutomationEngineer;
+import worker.Engineer;
+import worker.TestEngineer;
 
 
 public class UnitTestsForApply {
@@ -28,8 +27,8 @@ public class UnitTestsForApply {
 
     @Test
     public void mTaEFailed() {
-        test = new ManualTest(TestLevel.GUI, 10);
-        engineer = new AutomationEngineer();
+        test = new ManualTest (TestLevel.GUI, 10);
+        engineer = new AutomationEngineer ();
         engineer.setSkill(2);
         Assert.assertEquals(String.format(MSG,
                 test.getClass().getSimpleName(), engineer.getClass().getSimpleName(), engineer.getAnxiety()),
@@ -51,7 +50,7 @@ public class UnitTestsForApply {
     // Case three if ( false || true) -> true;  if: true
     @Test
     public void aTmEFailed() {
-        test = new AutomatedTest(TestLevel.GUI, 9);
+        test = new AutomatedTest (TestLevel.GUI, 9);
         engineer = new TestEngineer ();
         engineer.setSkill(6);
         Assert.assertEquals(String.format(MSG,

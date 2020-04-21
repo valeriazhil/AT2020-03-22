@@ -1,4 +1,4 @@
-package zhilenkova.day4.entity;
+package entity;
 
 public class ManualTest extends TestE {
     public ManualTest(TestLevel testLevel, int instability) {

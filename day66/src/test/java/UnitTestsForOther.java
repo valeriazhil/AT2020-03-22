@@ -1,15 +1,16 @@
-package zhilenkova.day4.test;
-
-import zhilenkova.day4.entity.TestE;
-import zhilenkova.day4.worker.*;
+import entity.TestE;
 import org.junit.Assert;
 import org.junit.Test;
+import worker.AutomationEngineer;
+import worker.Engineer;
+import worker.TestEngineer;
+
 
 public class UnitTestsForOther {
 
     private TestE test;
-    private final Engineer testEngineer = new TestEngineer();
-    private final Engineer automationEngineer = new AutomationEngineer();
+    private final Engineer testEngineer = new TestEngineer ();
+    private final Engineer automationEngineer = new AutomationEngineer ();
 
 
     @Test
