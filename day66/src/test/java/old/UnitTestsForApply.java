@@ -1,4 +1,4 @@
-/*
+package old;/*
 import zhilenkova.day4.entity.AutomatedTest;
 import zhilenkova.day4.entity.ManualTest;
 import zhilenkova.day4.entity.Result;
