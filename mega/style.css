@@ -1,0 +1,26 @@
+H1 {
+font-size: 130%;
+font-family: brush script mt;
+color: #008000;
+text-align: center}
+
+P{
+font-family: courier new;
+padding-left:20px
+}
+
+body {
+    background-image: url(bg.jpg);
+        -moz-background-size: 100%; /* Firefox 3.6+ */
+        -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+        -o-background-size: 100%; /* Opera 9.6+ */
+        background-size: 100%; /* Современные браузеры */
+
+
+   }
+
+   .round {
+       border-radius: 320px; /* Радиус скругления */
+       border: 3px solid white; /* Параметры рамки */
+       box-shadow: 0 0 7px #666; /* Параметры тени */
+      }
