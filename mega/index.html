@@ -1,0 +1,92 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Main page</title>
+
+
+  <link href="style.css "  rel="stylesheet">
+
+
+
+  <script type="text/javascript" src="myscript.js "></script>
+
+<script>
+      var cachedValue = '';
+
+      function hideValue(el) {
+        cachedValue = el.value;
+        el.value = '';
+      }
+
+      function setValue(el) {
+        el.value = cachedValue;
+      }
+    </script>
+
+
+  <style type="text/css">
+   h1 { 
+    font-size: 500%; 
+    font-family: "Century Gothic", sans-serif;
+    color: black;
+	text-align: center;
+   }
+
+   p {
+    font-size: 12pt; 
+    font-family: Comic Sans MS, sans-serif; 
+    color: grey;
+	text-align: center;
+   }
+
+
+input {
+    text-align: center;
+    font-family: "Comic Sans MS", sans-serif;
+	font-weight: bold;
+	font-size: 9pt; 
+    cursor:pointer;
+    border:none;
+    background-position: center;
+	width: 192px ; height:47px;
+	}
+
+
+#about {background: url(buttons_32.png) center no-repeat;}
+#about:hover {background: url(bgall.png) center no-repeat; width: 200px ; height:60px; font-size: 0%;}
+
+
+#regis {background: url(buttons_13.png) center no-repeat;}
+#regis:hover {background: url(bgall.png) center no-repeat; width: 200px ; height:60px; font-size: 0%;}
+
+#media {background: url(buttons_26.png) center no-repeat;}
+#media:hover {background: url(bgall.png) center no-repeat; width: 200px ; height:60px; font-size: 0%;}
+</style>
+  
+ </head>
+
+ <body>
+ 
+<h1>Welcome</h1>
+
+<center>
+
+	<form action="about.html" method="get">
+		<input onmouseover="hideValue(this)" onmouseout="setValue(this)" type="submit" id="about" value="About Us"/>
+	</form> 
+
+	<form action="app/index.php" method="get">
+		<input  onmouseover="hideValue(this)" onmouseout="setValue(this)" type="submit" id="regis" value="Check Registration"/>
+	</form> 
+
+	<form action="media.html" method="get">
+		<input  onmouseover="hideValue(this)" onmouseout="setValue(this)" type="submit" id="media" value="Get Media"/>
+	</form> 
+
+
+<br><br>
+</center>
+<p>This is just a dummy site (c)</p>
+
+</body>
+</html>
