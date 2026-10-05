@@ -3,11 +3,11 @@
 
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
+from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
 BLACK = RGBColor(0x00, 0x00, 0x00)
-LINE_CHARS = 36  # fits A5 width with larger font
 
 
 def set_a5(section):
@@ -15,8 +15,8 @@ def set_a5(section):
     section.page_height = Cm(21.0)
     section.left_margin = Cm(1.5)
     section.right_margin = Cm(1.5)
-    section.top_margin = Cm(1.2)
-    section.bottom_margin = Cm(1.2)
+    section.top_margin = Cm(1.3)
+    section.bottom_margin = Cm(1.5)
 
 
 def set_run_font(run, size=14, bold=False, italic=False, name="Georgia"):
@@ -50,18 +50,35 @@ def add_para(
 
 
 def add_divider(doc, char="* * *"):
-    add_para(doc, char, size=14, align=WD_ALIGN_PARAGRAPH.CENTER, space_before=2, space_after=6)
+    add_para(doc, char, size=12, align=WD_ALIGN_PARAGRAPH.CENTER, space_before=2, space_after=4)
+
+
+def add_write_line(doc, keep_with_next=True):
+    """One handwriting line via bottom border (compact, predictable height)."""
+    p = doc.add_paragraph()
+    p.paragraph_format.space_before = Pt(0)
+    p.paragraph_format.space_after = Pt(0)
+    p.paragraph_format.line_spacing = 1.0
+    p.paragraph_format.keep_with_next = keep_with_next
+    # Fixed height via empty run + bottom border
+    run = p.add_run(" ")
+    set_run_font(run, size=16)
+    pPr = p._p.get_or_add_pPr()
+    pBdr = OxmlElement("w:pBdr")
+    bottom = OxmlElement("w:bottom")
+    bottom.set(qn("w:val"), "single")
+    bottom.set(qn("w:sz"), "12")
+    bottom.set(qn("w:space"), "8")
+    bottom.set(qn("w:color"), "000000")
+    pBdr.append(bottom)
+    pPr.append(pBdr)
+    return p
 
 
 def add_lines(doc, n, size=13):
-    """Writing lines that stay on one A5 page."""
-    for _ in range(n):
-        p = doc.add_paragraph()
-        p.paragraph_format.space_before = Pt(0)
-        p.paragraph_format.space_after = Pt(0)
-        p.paragraph_format.line_spacing = 1.3
-        run = p.add_run("_" * LINE_CHARS)
-        set_run_font(run, size=size)
+    """Writing lines; last line does not keep_with_next."""
+    for i in range(n):
+        add_write_line(doc, keep_with_next=(i < n - 1))
 
 
 def page_break(doc):
@@ -70,42 +87,48 @@ def page_break(doc):
 
 def add_answer_block(doc, name, lines):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(4)
-    p.paragraph_format.space_after = Pt(1)
+    p.paragraph_format.space_before = Pt(6)
+    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.keep_with_next = True
     run = p.add_run(f"{name}:")
     set_run_font(run, size=14, bold=True)
-    add_lines(doc, lines, size=13)
+    add_lines(doc, lines)
 
 
-def add_question_page(doc, number, question, note=None, lines_each=7):
-    """One question per sheet; answer lines fill the rest of the page (no overflow)."""
+def add_question_page(doc, number, question, note=None, lines_each=6):
+    """One question per sheet; both answer blocks fit on the same A5 page."""
     add_para(
         doc,
         f"Вопрос {number}",
         size=12,
         bold=True,
         align=WD_ALIGN_PARAGRAPH.CENTER,
-        space_after=4,
+        space_after=2,
     )
+    # keep question with the rest of the page
+    doc.paragraphs[-1].paragraph_format.keep_with_next = True
     add_para(
         doc,
         question,
-        size=15,
+        size=14,
         bold=True,
         align=WD_ALIGN_PARAGRAPH.CENTER,
         space_before=2,
-        space_after=4,
+        space_after=2,
     )
+    doc.paragraphs[-1].paragraph_format.keep_with_next = True
     if note:
         add_para(
             doc,
             note,
-            size=12,
+            size=11,
             italic=True,
             align=WD_ALIGN_PARAGRAPH.CENTER,
-            space_after=4,
+            space_after=2,
         )
+        doc.paragraphs[-1].paragraph_format.keep_with_next = True
     add_divider(doc)
+    doc.paragraphs[-1].paragraph_format.keep_with_next = True
     add_answer_block(doc, "Илона", lines_each)
     add_answer_block(doc, "Лера", lines_each)
     page_break(doc)
@@ -224,7 +247,8 @@ def notes_section(doc, who, pages=10):
             align=WD_ALIGN_PARAGRAPH.CENTER,
             space_after=4,
         )
-        add_lines(doc, 16, size=13)
+        for j in range(14):
+            add_write_line(doc, keep_with_next=(j < 13))
         if not (who == "Леры" and i == pages):
             page_break(doc)
 
@@ -376,7 +400,7 @@ def build():
 
     for i, item in enumerate(PART1, 1):
         q, note = unpack(item)
-        add_question_page(doc, i, q, note=note, lines_each=7)
+        add_question_page(doc, i, q, note=note, lines_each=6)
 
     part_rules(
         doc,
@@ -394,7 +418,7 @@ def build():
 
     for i, item in enumerate(PART2, 51):
         q, note = unpack(item)
-        add_question_page(doc, i, q, note=note, lines_each=7)
+        add_question_page(doc, i, q, note=note, lines_each=6)
 
     notes_section(doc, "Илоны", 10)
     notes_section(doc, "Леры", 10)
