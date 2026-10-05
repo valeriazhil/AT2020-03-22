@@ -53,13 +53,13 @@ def add_divider(doc, char="* * *"):
     add_para(doc, char, size=14, align=WD_ALIGN_PARAGRAPH.CENTER, space_before=2, space_after=6)
 
 
-def add_lines(doc, n, size=14):
-    """Writing lines that fill vertical space on A5."""
+def add_lines(doc, n, size=13):
+    """Writing lines that stay on one A5 page."""
     for _ in range(n):
         p = doc.add_paragraph()
         p.paragraph_format.space_before = Pt(0)
         p.paragraph_format.space_after = Pt(0)
-        p.paragraph_format.line_spacing = 1.45
+        p.paragraph_format.line_spacing = 1.3
         run = p.add_run("_" * LINE_CHARS)
         set_run_font(run, size=size)
 
@@ -70,23 +70,15 @@ def page_break(doc):
 
 def add_answer_block(doc, name, lines):
     p = doc.add_paragraph()
-    p.paragraph_format.space_before = Pt(6)
-    p.paragraph_format.space_after = Pt(2)
+    p.paragraph_format.space_before = Pt(4)
+    p.paragraph_format.space_after = Pt(1)
     run = p.add_run(f"{name}:")
-    set_run_font(run, size=15, bold=True)
-    add_lines(doc, lines, size=14)
+    set_run_font(run, size=14, bold=True)
+    add_lines(doc, lines, size=13)
 
 
-def add_question_page(doc, part_label, number, question, note=None, lines_each=9):
-    """One question per sheet; answer lines fill the rest of the page."""
-    add_para(
-        doc,
-        part_label,
-        size=11,
-        bold=True,
-        align=WD_ALIGN_PARAGRAPH.CENTER,
-        space_after=2,
-    )
+def add_question_page(doc, number, question, note=None, lines_each=7):
+    """One question per sheet; answer lines fill the rest of the page (no overflow)."""
     add_para(
         doc,
         f"Вопрос {number}",
@@ -98,7 +90,7 @@ def add_question_page(doc, part_label, number, question, note=None, lines_each=9
     add_para(
         doc,
         question,
-        size=16,
+        size=15,
         bold=True,
         align=WD_ALIGN_PARAGRAPH.CENTER,
         space_before=2,
@@ -114,7 +106,6 @@ def add_question_page(doc, part_label, number, question, note=None, lines_each=9
             space_after=4,
         )
     add_divider(doc)
-    # ~9 lines each fills remaining A5 after larger question header
     add_answer_block(doc, "Илона", lines_each)
     add_answer_block(doc, "Лера", lines_each)
     page_break(doc)
@@ -152,14 +143,14 @@ def cover_page(doc):
     )
     add_para(
         doc,
-        "100 листов вопросов + по 10 листов заметок каждой.\nКаждая отвечает отдельно.\nПотом можно читать вслух —\nкак на самом милом реалити-шоу.",
+        "Каждая отвечает отдельно.\nПотом можно читать вслух —\nкак на самом милом реалити-шоу.",
         size=13,
         align=WD_ALIGN_PARAGRAPH.CENTER,
         space_after=12,
     )
     add_para(
         doc,
-        "Пишите честно и бережно. Нет правильных ответов — есть ваши.",
+        "Пишите честно и бережно.\nНет правильных ответов — есть ваши.",
         size=12,
         italic=True,
         align=WD_ALIGN_PARAGRAPH.CENTER,
@@ -219,7 +210,7 @@ def notes_section(doc, who, pages=10):
         add_para(
             doc,
             f"Страница {who}  ·  {i} из {pages}",
-            size=18,
+            size=16,
             bold=True,
             align=WD_ALIGN_PARAGRAPH.CENTER,
             space_after=4,
@@ -231,9 +222,9 @@ def notes_section(doc, who, pages=10):
             size=12,
             italic=True,
             align=WD_ALIGN_PARAGRAPH.CENTER,
-            space_after=6,
+            space_after=4,
         )
-        add_lines(doc, 18, size=14)
+        add_lines(doc, 16, size=13)
         if not (who == "Леры" and i == pages):
             page_break(doc)
 
@@ -383,10 +374,9 @@ def build():
         ],
     )
 
-    label1 = "Часть 1 · Реалити-шоу"
     for i, item in enumerate(PART1, 1):
         q, note = unpack(item)
-        add_question_page(doc, label1, i, q, note=note, lines_each=9)
+        add_question_page(doc, i, q, note=note, lines_each=7)
 
     part_rules(
         doc,
@@ -402,10 +392,9 @@ def build():
         ],
     )
 
-    label2 = "Часть 2 · Про нас"
-    for i, item in enumerate(PART2, 1):
+    for i, item in enumerate(PART2, 51):
         q, note = unpack(item)
-        add_question_page(doc, label2, i, q, note=note, lines_each=9)
+        add_question_page(doc, i, q, note=note, lines_each=7)
 
     notes_section(doc, "Илоны", 10)
     notes_section(doc, "Леры", 10)
